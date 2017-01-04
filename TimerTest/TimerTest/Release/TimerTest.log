@@ -1,0 +1,9 @@
+﻿  Generating code
+  All 2 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TimerTest.vcxproj -> c:\users\educ\documents\visual studio 2015\Projects\TimerTest\Release\TimerTest.exe
+  TimerTest.vcxproj -> c:\users\educ\documents\visual studio 2015\Projects\TimerTest\Release\TimerTest.pdb (Full PDB)
+  copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\bin\cudart*.dll" "c:\users\educ\documents\visual studio 2015\Projects\TimerTest\Release\"
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\bin\cudart32_80.dll
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\bin\cudart64_80.dll
+          2 file(s) copied.
