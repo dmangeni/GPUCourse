@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include<Windows.h>
 #include "../HighPerformanceTimer/HighPerformanceTimer.h"
+#include <omp.h>
 
 
 typedef int array_type_t;
@@ -35,11 +36,12 @@ void clean_up(array_type_t **a, array_type_t**b, array_type_t**c){
 		free(*c);
 }
 bool fill_array(array_type_t *a, array_type_t*b, array_type_t*c, int size) {
-
+//#pragma omp parallel for
 	for (int i = 0; i < size; i++) {
 		array_type_t random_number = (rand() % 100) + 1;
 		a[i] = random_number;
 		b[i] = random_number;
+		c[i] = 0;
 	}
 	return (!(a == nullptr)||(b == nullptr));
 }
@@ -57,11 +59,8 @@ bool addVecSerialCPU(array_type_t *a, array_type_t*b, array_type_t*c, int size) 
 	for (int i = 0; i < size; i++) {
 		c[i] = a[i] + b[i];
 	}
-
 	return (!(c == nullptr));
 }
-
-
 
 int main(int argc, char*argv[]) {
 
@@ -92,29 +91,27 @@ int main(int argc, char*argv[]) {
 		srand(GetTickCount());
 		//A program that uses a commandline argument to fill an array
 		std::cout << "Filling Arrays with random numbers:" << std::endl;
-		//fill_array(a, b, c, size);
 		if (!fill_array(a, b, c, size)) {
 			throw "ERROR: filling arrays with random numbers.";
 		}
-		print_arrays(a, size);
-		print_arrays(b, size);
-
-		//Add the two vectors
-
+		
 		//startTimer
 		const int AVERAGE_TIMES = 100;
-		h.TimeSinceLastCall();
 		double function_performance = 0;
+		h.TimeSinceLastCall();
 		for (int i = 0; i < AVERAGE_TIMES; i++) {
+			//h.TimeSinceLastCall();
 			addVecSerialCPU(a, b, c, size);
 			function_performance += h.TimeSinceLastCall();
-			if (!addVecSerialCPU(a, b, c, size)) {
-				throw "ERROR: filling array C.";
-			}
 		}
 		function_performance = function_performance / AVERAGE_TIMES;
 
-		std::cout <<"Runtime of AddVector:: " << function_performance << std::endl;
+		std::cout <<"Runtime of addingVectors:: " << std::fixed << function_performance << std::endl;
+
+		/*print_arrays(a, size);
+		print_arrays(b, size);*/
+
+		//Add the two vectors
 		
 	}
 	catch (char* err_message) {
