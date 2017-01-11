@@ -36,7 +36,6 @@ void clean_up(array_type_t **a, array_type_t**b, array_type_t**c){
 		free(*c);
 }
 bool fill_array(array_type_t *a, array_type_t*b, array_type_t*c, int size) {
-//#pragma omp parallel for
 	for (int i = 0; i < size; i++) {
 		array_type_t random_number = (rand() % 100) + 1;
 		a[i] = random_number;
